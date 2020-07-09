@@ -23,7 +23,7 @@ class PolicyDialog extends StatelessWidget {
         children: [
           Expanded(
             child: FutureBuilder(
-              future: Future.delayed(Duration(milliseconds: 150)).then((value) {
+              future: Future.delayed(Duration(milliseconds: 450)).then((value) {
                 return rootBundle.loadString('assets/$mdFileName');
               }),
               builder: (context, snapshot) {

@@ -1,7 +1,16 @@
+import 'dart:io';
+
+import 'package:NaanizTermsConditions/SignInPage.dart';
+import 'package:NaanizTermsConditions/main.dart';
 import 'package:NaanizTermsConditions/policy_dialog.dart';
+import 'package:NaanizTermsConditions/webViewTerms.dart';
 import 'package:animations/animations.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class TermsOfUse extends StatelessWidget {
   const TermsOfUse({
@@ -27,8 +36,46 @@ class TermsOfUse extends StatelessWidget {
                     context: context,
                     configuration: FadeScaleTransitionConfiguration(),
                     builder: (context) {
-                      return PolicyDialog(
-                        mdFileName: 'terms_and_conditions.md',
+                      return Scaffold(
+                        appBar: AppBar(
+                          title: Text("Terms and conditions"),
+                          automaticallyImplyLeading: true,
+                          leading: IconButton(
+                            icon: Icon(
+                              Icons.keyboard_arrow_left,
+                              color: Colors.white,
+                              size: 40,
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignInPage()),
+                              );
+                            },
+                          ),
+                        ),
+                        body: GestureDetector(
+                          onTap: () {
+                            print("This one doesn't print");
+                          },
+                          child: Container(
+                            child: Stack(
+                              children: <Widget>[
+                                WebView(
+                                  initialUrl: 'https://naaniz.com',
+                                  javascriptMode: JavascriptMode.unrestricted,
+                                  gestureRecognizers: Set()
+                                    ..add(Factory<TapGestureRecognizer>(
+                                        () => TapGestureRecognizer()
+                                          ..onTapDown = (tap) {
+                                            print("This one prints");
+                                          })),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       );
                     },
                   );
@@ -36,15 +83,54 @@ class TermsOfUse extends StatelessWidget {
             ),
             TextSpan(text: "and "),
             TextSpan(
-              text: "Privacy Policy! ",
+              text: "Privacy Policy",
               style: TextStyle(fontWeight: FontWeight.bold),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
-                  showDialog(
+                  showModal(
                     context: context,
+                    configuration: FadeScaleTransitionConfiguration(),
                     builder: (context) {
-                      return PolicyDialog(
-                        mdFileName: 'privacy_policy.md',
+                      return Scaffold(
+                        appBar: AppBar(
+                          title: Text("Privacy Policy"),
+                          automaticallyImplyLeading: true,
+                          leading: IconButton(
+                            icon: Icon(
+                              Icons.keyboard_arrow_left,
+                              color: Colors.white,
+                              size: 40,
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignInPage()),
+                              );
+                            },
+                          ),
+                        ),
+                        body: GestureDetector(
+                          onTap: () {
+                            print("This one doesn't print");
+                          },
+                          child: Container(
+                            child: Stack(
+                              children: <Widget>[
+                                WebView(
+                                  initialUrl: 'https://naaniz.com',
+                                  javascriptMode: JavascriptMode.unrestricted,
+                                  gestureRecognizers: Set()
+                                    ..add(Factory<TapGestureRecognizer>(
+                                        () => TapGestureRecognizer()
+                                          ..onTapDown = (tap) {
+                                            print("This one prints");
+                                          })),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       );
                     },
                   );
